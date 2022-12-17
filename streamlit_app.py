@@ -60,8 +60,8 @@ def main():
 
         data = pd.concat([train, test])
         ind = test.index
-        print(ind)
-        new_test = calc_metrics(data, ind)
+
+        new_test = calc_metrics(test, ind)
 
         model = pd.read_pickle(MODEL_PATH)
         pred = model.predict_proba(new_test)

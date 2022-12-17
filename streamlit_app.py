@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 from inference import calc_metrics
+from catboost import to_classifier
 
 TRAIN_PATH = "X_train.csv"
 MODEL_PATH = "model.pkl"
@@ -64,6 +65,7 @@ def main():
         new_test = calc_metrics(test, ind)
 
         model = pd.read_pickle(MODEL_PATH)
+        model = to_classifier(model)
         pred = model.predict_proba(new_test)
         k = .01
         labels = [1 if x > k else 0 for x in pred[:, 1]]

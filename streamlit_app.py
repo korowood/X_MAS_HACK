@@ -76,8 +76,8 @@ def main():
 
         test['prev_result'] = labels
         test['post_result'] = test.apply(lambda x: 1 if x['providerId'] == ID_PR else x.prev_result, axis=1)
-        test['result'] = test['post_result'].apply(lambda x: True if x == 1 else False)
-        ans = test['result']
+        test['command_result'] = test['post_result'].apply(lambda x: True if x == 1 else False)
+        ans = test['command_result']
         res = setup_page_preview(ans)
 
 

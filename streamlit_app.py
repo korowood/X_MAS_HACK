@@ -64,10 +64,14 @@ def main():
         new_test = calc_metrics(data, ind)
 
         model = pd.read_pickle(MODEL_PATH)
-        pred = model.predict(new_test)
+        pred = model.predict_proba(new_test)
+        k = .01
+        labels = [1 if x > k else 0 for x in pred[:, 1]]
 
-        test['prev_result'] = pred
-        test['result'] = test.apply(lambda x: 1 if x['providerId']==ID_PR else x.prev_result, axis=1)
+
+        test['prev_result'] = labels
+        test['post_result'] = test.apply(lambda x: 1 if x['providerId']==ID_PR else x.prev_result, axis=1)
+        test['result'] = test['post_result'].apply(lambda x: True if x==1 else False)
         ans = test['result']
         res = setup_page_preview(ans)
 

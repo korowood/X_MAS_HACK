@@ -11,6 +11,8 @@
 
 ## 4th place
 
+![alt text](https://github.com/korowood/X_MAS_HACK/winners.png)
+
 team: transformer_is_my_new_bf
 
 
